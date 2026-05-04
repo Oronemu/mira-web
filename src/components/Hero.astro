@@ -1,0 +1,73 @@
+---
+import type { Locale } from '../consts';
+import { t } from '../i18n/ui';
+import { SITE } from '../consts';
+import PhoneMockup from './PhoneMockup.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const hasAppStore = SITE.appStoreUrl !== '#';
+---
+
+<section class="relative px-4 pt-12 sm:px-6 sm:pt-20">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[1.1fr_1fr] md:gap-16">
+    <div class="reveal">
+      <p class="eyebrow">{t(locale, 'hero.eyebrow')}</p>
+      <h1
+        class="mt-5 font-serif text-[clamp(2.6rem,7vw,5.2rem)] font-medium leading-[1.05] tracking-tight text-ink dark:text-cream"
+        style="font-variation-settings: 'opsz' 144, 'wght' 500, 'SOFT' 100;"
+      >
+        <span class="block">{t(locale, 'hero.title.a')}</span>
+        <span
+          class="block italic pb-1"
+          style="background: linear-gradient(120deg, #B98D85, #7A8E78 50%, #B5904B); -webkit-background-clip: text; background-clip: text; color: transparent; font-variation-settings: 'opsz' 144, 'wght' 400, 'SOFT' 100;"
+        >
+          {t(locale, 'hero.title.b')}
+        </span>
+        <span class="block">{t(locale, 'hero.title.c')}</span>
+      </h1>
+
+      <p class="mt-7 max-w-lg text-base leading-relaxed text-ink-soft sm:text-lg">
+        {t(locale, 'hero.subtitle')}
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        {hasAppStore ? (
+          <a href={SITE.appStoreUrl} class="btn btn-primary">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.05 12.04c-.03-2.94 2.4-4.36 2.5-4.43-1.36-2-3.49-2.27-4.24-2.3-1.81-.18-3.53 1.06-4.45 1.06-.92 0-2.34-1.04-3.85-1.01-1.98.03-3.81 1.15-4.83 2.92-2.06 3.58-.53 8.85 1.48 11.75.98 1.42 2.15 3.01 3.67 2.95 1.48-.06 2.04-.95 3.83-.95s2.29.95 3.85.92c1.59-.03 2.6-1.43 3.57-2.86 1.13-1.64 1.59-3.23 1.62-3.31-.04-.02-3.11-1.19-3.15-4.74Zm-2.93-8.69c.81-1 1.36-2.37 1.21-3.75-1.17.05-2.6.79-3.44 1.78-.75.87-1.41 2.27-1.23 3.61 1.31.1 2.65-.66 3.46-1.64Z"/>
+            </svg>
+            {t(locale, 'hero.cta.primary')}
+          </a>
+        ) : (
+          <span class="btn btn-primary cursor-default opacity-70">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.05 12.04c-.03-2.94 2.4-4.36 2.5-4.43-1.36-2-3.49-2.27-4.24-2.3-1.81-.18-3.53 1.06-4.45 1.06-.92 0-2.34-1.04-3.85-1.01-1.98.03-3.81 1.15-4.83 2.92-2.06 3.58-.53 8.85 1.48 11.75.98 1.42 2.15 3.01 3.67 2.95 1.48-.06 2.04-.95 3.83-.95s2.29.95 3.85.92c1.59-.03 2.6-1.43 3.57-2.86 1.13-1.64 1.59-3.23 1.62-3.31-.04-.02-3.11-1.19-3.15-4.74Zm-2.93-8.69c.81-1 1.36-2.37 1.21-3.75-1.17.05-2.6.79-3.44 1.78-.75.87-1.41 2.27-1.23 3.61 1.31.1 2.65-.66 3.46-1.64Z"/>
+            </svg>
+            {t(locale, 'hero.cta.coming')}
+          </span>
+        )}
+        <a href="#features" class="btn btn-ghost">
+          {t(locale, 'hero.cta.secondary')}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Tiny privacy chip under the CTA — sets the tone immediately -->
+      <div class="mt-7 inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/40 px-3 py-1.5 text-xs text-ink-muted backdrop-blur-md dark:border-white/10 dark:bg-white/5">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+        <span>
+          {locale === 'ru'
+            ? 'iOS 26+ · Работает на устройстве'
+            : 'iOS 26+ · Runs on your device'}
+        </span>
+      </div>
+    </div>
+
+    <div class="reveal" data-delay="2">
+      <PhoneMockup locale={locale} />
+    </div>
+  </div>
+</section>

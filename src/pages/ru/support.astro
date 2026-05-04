@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+import { SITE } from '../../consts';
+import { t } from '../../i18n/ui';
+
+const locale = 'ru' as const;
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${t(locale, 'support.title')} — Mira`}
+  description={t(locale, 'support.intro')}
+  pathname="/support"
+>
+  <section class="px-4 pt-8 sm:px-6">
+    <div class="mx-auto max-w-3xl">
+      <div class="glass reveal px-8 py-14 text-center sm:px-12">
+        <h1
+          class="font-serif text-[clamp(2.2rem,5vw,3.6rem)] font-medium leading-tight"
+          style="font-variation-settings: 'opsz' 144, 'wght' 500, 'SOFT' 80;"
+        >
+          {t(locale, 'support.title')}
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink-soft sm:text-lg">
+          {t(locale, 'support.intro')}
+        </p>
+        <div class="mt-9 flex flex-col items-center gap-3">
+          <a href={`mailto:${SITE.supportEmail}`} class="btn btn-primary">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="m3 7 9 6 9-6"/>
+            </svg>
+            {t(locale, 'support.cta')}
+          </a>
+          <a href={`mailto:${SITE.supportEmail}`} class="text-sm text-ink-muted underline-offset-4 hover:underline">
+            {SITE.supportEmail}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FAQ locale={locale} />
+</BaseLayout>

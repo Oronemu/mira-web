@@ -1,0 +1,44 @@
+---
+import type { Locale } from '../consts';
+import { t } from '../i18n/ui';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<section id="philosophy" class="relative px-4 py-28 sm:px-6">
+  <div class="mx-auto max-w-4xl">
+    <div class="reveal text-center">
+      <p class="eyebrow">{t(locale, 'philosophy.eyebrow')}</p>
+      <h2
+        class="mt-4 font-serif text-[clamp(2rem,4.5vw,3.4rem)] font-medium leading-[1.1]"
+        style="font-variation-settings: 'opsz' 144, 'wght' 500, 'SOFT' 80;"
+      >
+        {t(locale, 'philosophy.title')}
+      </h2>
+    </div>
+
+    <div class="reveal mt-10 text-center text-lg leading-relaxed text-ink-soft sm:text-xl" data-delay="2">
+      {t(locale, 'philosophy.body')}
+    </div>
+
+    <figure class="reveal mx-auto mt-14 max-w-2xl text-center" data-delay="3">
+      <div class="glass px-8 py-10 sm:px-10">
+        <span
+          class="inline-block font-serif text-5xl leading-none text-ochre"
+          style="font-variation-settings: 'opsz' 144, 'wght' 500;"
+          aria-hidden="true"
+        >“</span>
+        <blockquote
+          class="mt-2 font-serif text-xl italic leading-snug text-ink sm:text-2xl dark:text-cream"
+          style="font-variation-settings: 'opsz' 24, 'wght' 400, 'SOFT' 100;"
+        >
+          {t(locale, 'philosophy.quote')}
+        </blockquote>
+        <figcaption class="mt-5 text-sm uppercase tracking-[0.18em] text-ink-muted">
+          — {t(locale, 'philosophy.quote.attribution')}
+        </figcaption>
+      </div>
+    </figure>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="rose" cx="0%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#FBE7DD" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#D9B7B0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sage" cx="100%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#C9D6C5" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#A4B5A2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ochre" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#EBD49A" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#D9B36C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="logo" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FBE7DD"/>
+      <stop offset="55%" stop-color="#D9B7B0"/>
+      <stop offset="100%" stop-color="#7A8E78"/>
+    </radialGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1C1B1F"/>
+      <stop offset="100%" stop-color="#3A3940"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cream paper -->
+  <rect width="1200" height="630" fill="#FAF7F2"/>
+
+  <!-- Mood orbs -->
+  <rect width="1200" height="630" fill="url(#rose)"/>
+  <rect width="1200" height="630" fill="url(#sage)"/>
+  <rect width="1200" height="630" fill="url(#ochre)"/>
+
+  <!-- Logo mark -->
+  <g transform="translate(80,90)">
+    <rect width="84" height="84" rx="22" fill="url(#logo)"/>
+    <text x="42" y="62" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="50" font-style="italic" font-weight="500" fill="#1C1B1F">m</text>
+  </g>
+  <text x="180" y="148" font-family="ui-serif, Georgia, serif" font-size="44" font-weight="500" fill="#1C1B1F">Mira</text>
+
+  <!-- Headline -->
+  <text x="80" y="320" font-family="ui-serif, Georgia, serif" font-size="92" font-weight="500" fill="url(#ink)">A journal that</text>
+  <text x="80" y="420" font-family="ui-serif, Georgia, serif" font-size="92" font-style="italic" font-weight="400" fill="#7A8E78">listens in private.</text>
+
+  <!-- Tagline -->
+  <text x="80" y="500" font-family="ui-sans-serif, system-ui, sans-serif" font-size="28" fill="#3A3940">Offline iOS journal with on-device reflection.</text>
+
+  <!-- Domain -->
+  <text x="80" y="560" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="500" letter-spacing="2" fill="#6B6A72">MIRA-DIARY.COM</text>
+</svg>

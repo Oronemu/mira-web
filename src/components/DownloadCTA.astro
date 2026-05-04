@@ -1,0 +1,50 @@
+---
+import type { Locale } from '../consts';
+import { t } from '../i18n/ui';
+import { SITE } from '../consts';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const hasAppStore = SITE.appStoreUrl !== '#';
+---
+
+<section id="download" class="relative px-4 py-28 sm:px-6">
+  <div class="mx-auto max-w-4xl">
+    <div class="glass reveal relative overflow-hidden px-8 py-16 text-center sm:px-16 sm:py-20">
+      <!-- Soft inner gradient that hints at sunrise -->
+      <span
+        class="pointer-events-none absolute inset-0 -z-0"
+        style="background: radial-gradient(ellipse at 30% 0%, rgba(217,183,176,0.45), transparent 55%), radial-gradient(ellipse at 100% 100%, rgba(217,179,108,0.35), transparent 55%);"
+        aria-hidden="true"
+      ></span>
+
+      <h2
+        class="relative font-serif text-[clamp(2.2rem,5vw,3.8rem)] font-medium leading-[1.05] tracking-tight"
+        style="font-variation-settings: 'opsz' 144, 'wght' 500, 'SOFT' 100;"
+      >
+        {t(locale, 'cta.title')}
+      </h2>
+      <p class="relative mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+        {t(locale, 'cta.body')}
+      </p>
+
+      <div class="relative mt-10 flex flex-wrap items-center justify-center gap-3">
+        {hasAppStore ? (
+          <a href={SITE.appStoreUrl} class="btn btn-primary">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.05 12.04c-.03-2.94 2.4-4.36 2.5-4.43-1.36-2-3.49-2.27-4.24-2.3-1.81-.18-3.53 1.06-4.45 1.06-.92 0-2.34-1.04-3.85-1.01-1.98.03-3.81 1.15-4.83 2.92-2.06 3.58-.53 8.85 1.48 11.75.98 1.42 2.15 3.01 3.67 2.95 1.48-.06 2.04-.95 3.83-.95s2.29.95 3.85.92c1.59-.03 2.6-1.43 3.57-2.86 1.13-1.64 1.59-3.23 1.62-3.31-.04-.02-3.11-1.19-3.15-4.74Zm-2.93-8.69c.81-1 1.36-2.37 1.21-3.75-1.17.05-2.6.79-3.44 1.78-.75.87-1.41 2.27-1.23 3.61 1.31.1 2.65-.66 3.46-1.64Z"/>
+            </svg>
+            {t(locale, 'hero.cta.primary')}
+          </a>
+        ) : (
+          <span class="btn btn-primary cursor-default opacity-70">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.05 12.04c-.03-2.94 2.4-4.36 2.5-4.43-1.36-2-3.49-2.27-4.24-2.3-1.81-.18-3.53 1.06-4.45 1.06-.92 0-2.34-1.04-3.85-1.01-1.98.03-3.81 1.15-4.83 2.92-2.06 3.58-.53 8.85 1.48 11.75.98 1.42 2.15 3.01 3.67 2.95 1.48-.06 2.04-.95 3.83-.95s2.29.95 3.85.92c1.59-.03 2.6-1.43 3.57-2.86 1.13-1.64 1.59-3.23 1.62-3.31-.04-.02-3.11-1.19-3.15-4.74Zm-2.93-8.69c.81-1 1.36-2.37 1.21-3.75-1.17.05-2.6.79-3.44 1.78-.75.87-1.41 2.27-1.23 3.61 1.31.1 2.65-.66 3.46-1.64Z"/>
+            </svg>
+            {t(locale, 'hero.cta.coming')}
+          </span>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

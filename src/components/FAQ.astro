@@ -1,0 +1,65 @@
+---
+import type { Locale } from '../consts';
+import { t } from '../i18n/ui';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+
+// Six most-asked questions, mirrored from the in-app FAQ. Full set lives in
+// Settings → Help & support inside the app.
+const faqs = locale === 'ru'
+  ? [
+      { q: 'Где живут мои записи?', a: 'На вашем iPhone. Дневник остаётся на этом устройстве. Если включить синхронизацию iCloud, записи также сохраняются в вашем приватном iCloud — прочитать их можете только вы. Когда вы спрашиваете Mira через облачный AI, на сервер уходит только ваш вопрос и небольшой релевантный фрагмент дневника; остальное остаётся на телефоне.' },
+      { q: 'Чем отличается бесплатная версия от Pro?', a: 'Бесплатная даёт полноценный дневник: запись, настроение, фото, теги, календарь, поиск, синхронизацию iCloud, биометрический замок и локальный AI для рефлексии. Pro открывает Спросите Mira с облачным AI, расширенную статистику, темы и иконки, экспорт в PDF, свою AI-персону, умные фильтры, цели и привычки, виджеты на экране блокировки и импорт из других приложений.' },
+      { q: 'Как работает бесплатный пробный период?', a: 'Pro начинается с 7-дневного пробного периода. Деньги не списываются до конца триала. Отмените в любой момент во время триала — Pro будет работать до конца триала, потом вернётесь на бесплатную версию без списания.' },
+      { q: 'Как отменить подписку?', a: 'Откройте приложение Настройки на iPhone, нажмите на ваше имя сверху, выберите Подписки, затем Mira Pro и Отменить подписку. Pro-функции останутся активны до конца оплаченного периода.' },
+      { q: 'Я в России — всё ли работает?', a: 'Почти вся Mira работает без наших серверов: запись, настроение, фото, поиск, синхронизация iCloud, темы, AI на устройстве. Облачные функции (Спросите Mira и еженедельные обзоры через Облако) обращаются к внешним серверам и могут периодически тормозить или блокироваться в российских сетях из-за регуляторных ограничений на исходящий трафик. Если столкнулись с этим — переключите AI на устройство в Настройки → Интеллект, он работает полностью на iPhone и не зависит ни от какого внешнего сервиса.' },
+      { q: 'Можно ли удалить все мои данные?', a: 'Да. Настройки → Приватность → Удалить все записи стирает всё с этого iPhone. Если включена синхронизация iCloud, удаление дойдёт до других устройств при следующей синхронизации. Если хотите, чтобы мы со своей стороны очистили запись о вашей подписке — напишите в поддержку.' },
+    ]
+  : [
+      { q: 'Where do my entries live?', a: 'On your iPhone. Your journal stays on this device. If you turn on iCloud sync, your entries also save to your private iCloud — only you can read them. When you ask Mira a question with cloud AI, only that question and a small relevant piece of your journal go to our servers; everything else stays on the phone.' },
+      { q: 'What\'s the difference between free and Pro?', a: 'Free gives you the full journal: writing, mood, photos, tags, calendar, search, iCloud sync, biometric lock, and a local AI for reflections. Pro unlocks Ask Mira with cloud AI, advanced stats, themes and icons, PDF export, your own AI persona, smart filters, goals and habits, Lock Screen widgets, and importers from other journal apps.' },
+      { q: 'How does the free trial work?', a: 'Pro starts with a 7-day free trial. You won\'t be charged until the trial ends. Cancel any time during the trial — you\'ll keep Pro until the trial expires, then drop back to free with no charge.' },
+      { q: 'How do I cancel my subscription?', a: 'Open the iPhone Settings app, tap your name at the top, choose Subscriptions, tap Mira Pro, and Cancel Subscription. Your Pro features stay active until the end of the current billing period.' },
+      { q: 'I\'m in Russia — does everything work?', a: 'Almost all of Mira works without our servers: writing, mood, photos, search, iCloud sync, themes, the on-device AI. The cloud features (Ask Mira and weekly reflections through the Cloud option) talk to external servers and may be intermittently slow or blocked on Russian networks due to regulatory restrictions on outbound services. If you run into that, switch to the on-device AI in Settings → Intelligence — it runs entirely on your iPhone and doesn\'t depend on any external service.' },
+      { q: 'Can I delete all my data?', a: 'Yes. Settings → Privacy → Delete all entries removes everything from this iPhone. If iCloud sync is on, the deletion also reaches your other devices the next time they sync. If you\'d also like us to clear any record of your subscription on our side, write to support.' },
+    ];
+---
+
+<section id="faq" class="relative px-4 py-28 sm:px-6">
+  <div class="mx-auto max-w-3xl">
+    <div class="reveal text-center">
+      <p class="eyebrow">{t(locale, 'faq.eyebrow')}</p>
+      <h2
+        class="mt-4 font-serif text-[clamp(2rem,4.5vw,3.4rem)] font-medium leading-[1.05]"
+        style="font-variation-settings: 'opsz' 144, 'wght' 500, 'SOFT' 80;"
+      >
+        {t(locale, 'faq.title')}
+      </h2>
+    </div>
+
+    <div class="mt-12 space-y-3">
+      {faqs.map((f, i) => (
+        <details
+          class="glass reveal group cursor-pointer px-6 py-5 transition-shadow duration-500 hover:shadow-glass open:shadow-glass"
+          data-delay={String(Math.min(i + 1, 5))}
+        >
+          <summary class="flex list-none items-center justify-between gap-4">
+            <span class="font-serif text-lg font-medium leading-snug text-ink dark:text-cream">{f.q}</span>
+            <span
+              class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink/5 text-ink transition-transform duration-500 group-open:rotate-45 dark:bg-white/10 dark:text-cream"
+              aria-hidden="true"
+            >+</span>
+          </summary>
+          <p class="mt-4 text-[15px] leading-relaxed text-ink-soft">
+            {f.a}
+          </p>
+        </details>
+      ))}
+    </div>
+
+    <p class="reveal mt-10 text-center text-sm text-ink-muted">
+      {t(locale, 'faq.see_all')}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,61 @@
+---
+import type { Locale } from '../consts';
+import { localizedPath } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import LangSwitch from './LangSwitch.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  locale: Locale;
+  /** The current pathname stripped of locale prefix, used by LangSwitch. */
+  pathname?: string;
+}
+
+const { locale, pathname = '/' } = Astro.props;
+const home = localizedPath(locale, '/');
+
+const navItems = [
+  { key: 'nav.features', href: `${home}#features` },
+  { key: 'nav.privacy', href: `${home}#privacy` },
+  { key: 'nav.philosophy', href: `${home}#philosophy` },
+  { key: 'nav.faq', href: `${home}#faq` },
+] as const;
+---
+
+<header class="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
+  <nav class="glass mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full px-4 py-2.5 sm:px-6">
+    <a href={home} class="flex items-center gap-2.5 text-ink dark:text-cream" aria-label="Mira home">
+      <span
+        class="grid h-8 w-8 place-items-center rounded-xl font-serif text-lg italic font-medium"
+        style="background: radial-gradient(circle at 30% 30%, #FBE7DD, #D9B7B0 55%, #7A8E78);"
+      >
+        m
+      </span>
+      <span class="font-serif text-lg font-medium tracking-tight">Mira</span>
+    </a>
+
+    <ul class="hidden items-center gap-7 text-sm text-ink-soft md:flex">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="transition-colors duration-300 hover:text-ink dark:hover:text-cream"
+          >
+            {t(locale, item.key)}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <LangSwitch locale={locale} pathname={pathname} />
+      <a
+        href={`${home}#download`}
+        class="btn btn-primary hidden text-sm sm:inline-flex"
+      >
+        {t(locale, 'nav.download')}
+      </a>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,51 @@
+---
+import type { Locale } from '../consts';
+import { localizedPath } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import { SITE } from '../consts';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props {
+  locale: Locale;
+  pathname?: string;
+}
+const { locale, pathname = '/' } = Astro.props;
+---
+
+<footer class="relative mt-32 px-4 pb-10 sm:px-6">
+  <div class="glass mx-auto max-w-6xl px-6 py-10 sm:px-10 sm:py-12">
+    <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+      <div class="max-w-md">
+        <div class="flex items-center gap-2.5">
+          <span
+            class="grid h-9 w-9 place-items-center rounded-xl font-serif text-xl italic font-medium"
+            style="background: radial-gradient(circle at 30% 30%, #FBE7DD, #D9B7B0 55%, #7A8E78);"
+          >m</span>
+          <span class="font-serif text-xl font-medium">Mira</span>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-ink-soft">{t(locale, 'footer.tagline')}</p>
+        <p class="mt-6 text-xs text-ink-muted">{t(locale, 'footer.copy')}</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-x-10 gap-y-3 text-sm">
+        <a href={localizedPath(locale, '/privacy')} class="text-ink-soft transition-colors hover:text-ink dark:hover:text-cream">
+          {t(locale, 'footer.legal.privacy')}
+        </a>
+        <a href={localizedPath(locale, '/terms')} class="text-ink-soft transition-colors hover:text-ink dark:hover:text-cream">
+          {t(locale, 'footer.legal.terms')}
+        </a>
+        <a href={localizedPath(locale, '/support')} class="text-ink-soft transition-colors hover:text-ink dark:hover:text-cream">
+          {t(locale, 'footer.legal.support')}
+        </a>
+        <a href={`mailto:${SITE.supportEmail}`} class="text-ink-soft transition-colors hover:text-ink dark:hover:text-cream">
+          {SITE.supportEmail}
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span class="text-xs uppercase tracking-[0.18em] text-ink-muted">{t(locale, 'footer.lang')}</span>
+        <LangSwitch locale={locale} pathname={pathname} />
+      </div>
+    </div>
+  </div>
+</footer>

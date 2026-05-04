@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import Philosophy from '../components/Philosophy.astro';
+import PrivacyHighlights from '../components/PrivacyHighlights.astro';
+import AICard from '../components/AICard.astro';
+import FAQ from '../components/FAQ.astro';
+import DownloadCTA from '../components/DownloadCTA.astro';
+import { SITE } from '../consts';
+
+const locale = 'en' as const;
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${SITE.name} — ${SITE.tagline.en}`}
+  description={SITE.description.en}
+  pathname="/"
+>
+  <Hero locale={locale} />
+  <FeatureGrid locale={locale} />
+  <Philosophy locale={locale} />
+  <PrivacyHighlights locale={locale} />
+  <AICard locale={locale} />
+  <FAQ locale={locale} />
+  <DownloadCTA locale={locale} />
+</BaseLayout>

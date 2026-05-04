@@ -1,0 +1,12 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro';
+import { t } from '../../i18n/ui';
+
+const { Content } = await import('../../content/legal/terms.ru.md');
+
+const locale = 'ru' as const;
+---
+
+<LegalLayout locale={locale} title={t(locale, 'legal.terms.title')} pathname="/terms">
+  <Content />
+</LegalLayout>

@@ -1,0 +1,23 @@
+---
+import type { Locale } from '../consts';
+import { localizedPath, altLocale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  /** Pathname *without* the locale prefix, e.g. '/', '/privacy', '/support'. */
+  pathname?: string;
+}
+
+const { locale, pathname = '/' } = Astro.props;
+const other = altLocale(locale);
+const target = localizedPath(other, pathname);
+const label = other === 'en' ? 'EN' : 'RU';
+---
+
+<a
+  href={target}
+  class="glass-sm inline-flex h-9 min-w-[3.25rem] items-center justify-center rounded-full px-3 text-xs font-medium tracking-[0.18em] text-ink transition-transform duration-500 ease-quiet hover:-translate-y-0.5 dark:text-cream"
+  aria-label={`Switch to ${label}`}
+>
+  {label}
+</a>
