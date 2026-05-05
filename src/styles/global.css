@@ -306,4 +306,38 @@
     border-radius: 4px;
   }
   html.dark .prose-legal code { background: rgba(255,255,255,0.08); }
+
+  /* Tables — markdown-rendered tables (e.g. the data summary in §18 of
+     the privacy policy) wrap natively on desktop but overflow viewport
+     on mobile. `display: block` + horizontal scroll keeps them readable
+     on narrow screens without rewriting the markdown. */
+  .prose-legal table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.9em;
+  }
+  .prose-legal th,
+  .prose-legal td {
+    border: 1px solid rgba(28,27,31,0.12);
+    padding: 0.55em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+  html.dark .prose-legal th,
+  html.dark .prose-legal td {
+    border-color: rgba(244,241,234,0.12);
+  }
+  .prose-legal th {
+    background: rgba(28,27,31,0.04);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  html.dark .prose-legal th {
+    background: rgba(255,255,255,0.04);
+  }
 }

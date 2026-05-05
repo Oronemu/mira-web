@@ -67,16 +67,25 @@ const altUrl = new URL(altPath, SITE.url).toString();
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Default = dark; only flip to light if the user explicitly chose it.
-         Inline + `is:inline` so we apply the class before first paint (no flash). -->
+         Inline + `is:inline` so we apply the class before first paint (no flash).
+         Also re-applied on `astro:after-swap` because View Transitions reset
+         the `<html>` class (and `<meta name="theme-color">`) to the server-
+         rendered defaults on every soft navigation — without this hook the
+         user's choice would be lost the moment they switch language. -->
     <script is:inline>
       (function () {
-        try {
-          if (localStorage.getItem('theme') !== 'light') {
+        function applyTheme() {
+          try {
+            var isLight = localStorage.getItem('theme') === 'light';
+            document.documentElement.classList.toggle('dark', !isLight);
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', isLight ? '#FAF7F2' : '#0F0F12');
+          } catch (_) {
             document.documentElement.classList.add('dark');
           }
-        } catch (_) {
-          document.documentElement.classList.add('dark');
         }
+        applyTheme();
+        document.addEventListener('astro:after-swap', applyTheme);
       })();
     </script>
 
