@@ -7,25 +7,112 @@ interface Props {
 
 const { locale } = Astro.props;
 
-// Sample journal entries shown inside the mockup. Kept short, evocative.
-const entries =
+// 1:1 with the real EntryListView in the app:
+//   • toolbar: line.3.horizontal.decrease.circle (left), square.and.pencil (right)
+//   • .searchable(.navigationBarDrawer) — full-width search bar above the hero
+//   • collapsibleHeroTitle — "Journal" + entry-count subtitle
+//   • month section header (month + year + count)
+//   • EntryRowCard — mood-accent bar, date + mood emoji, body, tags
+//   • MiraTabBar — floating capsule with Liquid Glass, 4 tabs:
+//     book / sparkles / quote.bubble / gearshape (Settings).
+//     Active tab uses the .fill SF Symbol variant + mood-tinted capsule pill.
+
+type Entry = {
+  date: string;
+  mood: string;
+  accent: string;
+  tint: string;
+  body: string;
+  tags?: string[];
+};
+
+// Mood emoji + accent colors mirror the real app (CoreKit Mood+Display.swift,
+// MiraPalette.mood(level:)):
+//   1 veryLow  😢  #8892B0 cool blue
+//   2 low      😟  #A89CC0 lavender
+//   3 neutral  😐  #C9B89D warm sand
+//   4 good     🙂  #E0A58F terracotta
+//   5 veryGood 😄  #9FB889 sage
+const entries: Entry[] =
   locale === 'ru'
     ? [
-        { date: 'ВТ · 5 МАЯ', mood: '🌤', title: 'После прогулки', body: 'Воздух пах дождём. Кажется, я перестал спешить.' },
-        { date: 'ПН · 4 МАЯ', mood: '🌙', title: 'Перед сном', body: 'Сегодня сделал немного. И этого достаточно.' },
-        { date: 'ВС · 3 МАЯ', mood: '☕', title: 'Утренний кофе', body: 'Тишина в кухне. Книга открыта на середине.' },
+        {
+          date: 'МАЙ 5 · 9:24',
+          mood: '🙂',
+          accent: '#E0A58F',
+          tint: 'rgba(224,165,143,0.10)',
+          body: 'Воздух пах дождём. Кажется, я перестал спешить — просто шёл и смотрел, как блестит асфальт.',
+          tags: ['прогулка', 'утро'],
+        },
+        {
+          date: 'МАЙ 4 · 22:51',
+          mood: '😐',
+          accent: '#C9B89D',
+          tint: 'rgba(201,184,157,0.12)',
+          body: 'Сегодня сделал немного. И этого достаточно. Иногда «достаточно» — это уже победа.',
+          tags: ['итоги дня'],
+        },
+        {
+          date: 'МАЙ 3 · 8:12',
+          mood: '😄',
+          accent: '#9FB889',
+          tint: 'rgba(159,184,137,0.10)',
+          body: 'Тишина в кухне. Книга открыта на середине. Кофе остыл, пока я смотрел в окно.',
+          tags: ['кофе', 'воскресенье'],
+        },
       ]
     : [
-        { date: 'TUE · MAY 5', mood: '🌤', title: 'After the walk', body: 'The air smelled like rain. I think I stopped rushing.' },
-        { date: 'MON · MAY 4', mood: '🌙', title: 'Before sleep', body: 'I did very little today. And it was enough.' },
-        { date: 'SUN · MAY 3', mood: '☕', title: 'Morning coffee', body: 'Quiet kitchen. The book open at the middle.' },
+        {
+          date: 'MAY 5 · 9:24',
+          mood: '🙂',
+          accent: '#E0A58F',
+          tint: 'rgba(224,165,143,0.10)',
+          body: 'The air smelled like rain. I think I stopped rushing — just walked and watched the wet pavement shine.',
+          tags: ['walk', 'morning'],
+        },
+        {
+          date: 'MAY 4 · 10:51 PM',
+          mood: '😐',
+          accent: '#C9B89D',
+          tint: 'rgba(201,184,157,0.12)',
+          body: 'I did very little today. And it was enough. Sometimes "enough" is already a win.',
+          tags: ['day-end'],
+        },
+        {
+          date: 'MAY 3 · 8:12 AM',
+          mood: '😄',
+          accent: '#9FB889',
+          tint: 'rgba(159,184,137,0.10)',
+          body: 'Quiet kitchen. The book open at the middle. Coffee gone cold while I stared out of the window.',
+          tags: ['coffee', 'sunday'],
+        },
       ];
 
-const askLabel = locale === 'ru' ? 'Спросите Mira' : 'Ask Mira';
-const askPrompt =
+const heroTitle = locale === 'ru' ? 'Дневник' : 'Journal';
+const heroSubtitle = locale === 'ru' ? '23 записи · Май 2026' : '23 entries · May 2026';
+const monthLabel = locale === 'ru' ? 'Май' : 'May';
+const yearLabel = '2026';
+const monthCount = '12';
+const searchPlaceholder = locale === 'ru' ? 'Поиск по записям' : 'Search entries';
+
+const tabs =
   locale === 'ru'
-    ? 'Что меня успокаивало в апреле?'
-    : 'What was calming me in April?';
+    ? [
+        { key: 'journal',  label: 'Дневник',  active: true  },
+        { key: 'ask',      label: 'Спросить', active: false },
+        { key: 'insights', label: 'Инсайты',  active: false },
+        { key: 'settings', label: 'Настройки',active: false },
+      ]
+    : [
+        { key: 'journal',  label: 'Journal',  active: true  },
+        { key: 'ask',      label: 'Ask',      active: false },
+        { key: 'insights', label: 'Insights', active: false },
+        { key: 'settings', label: 'Settings', active: false },
+      ];
+
+// Tint for the active tab pill — matches MiraPalette.mood(level: 5) sage,
+// which is what the AppearanceState defaults to in a fresh install.
+const activeTint = '#9FB889';
 ---
 
 <div class="relative mx-auto w-full max-w-[340px] sm:max-w-[380px]">
@@ -36,7 +123,7 @@ const askPrompt =
     aria-hidden="true"
   ></div>
 
-  <!-- Phone frame: a CSS-only iPhone silhouette with Dynamic Island -->
+  <!-- Phone frame -->
   <div
     class="relative aspect-[9/19.5] overflow-hidden rounded-[3rem] border border-black/10 bg-cream-deep p-2 shadow-[0_50px_100px_-20px_rgba(28,27,31,0.4),0_8px_24px_-8px_rgba(28,27,31,0.2)] animate-floaty dark:border-white/10 dark:bg-night-surface"
     style="background: linear-gradient(160deg, #f7f1e6 0%, #ebe2d2 100%);"
@@ -46,18 +133,21 @@ const askPrompt =
 
     <!-- Screen -->
     <div class="relative h-full w-full overflow-hidden rounded-[2.5rem] bg-cream dark:bg-night">
-      <!-- Mood gradient header -->
+      <!-- AmbientBackground: soft mood-tinted gradient -->
       <div
-        class="absolute inset-x-0 top-0 h-44"
-        style="background: radial-gradient(ellipse at 30% 0%, rgba(217,183,176,0.6), transparent 60%), radial-gradient(ellipse at 100% 30%, rgba(164,181,162,0.45), transparent 60%);"
+        class="absolute inset-x-0 top-0 h-[55%]"
+        style="background:
+          radial-gradient(ellipse at 20% 0%, rgba(217,183,176,0.55), transparent 55%),
+          radial-gradient(ellipse at 95% 15%, rgba(164,181,162,0.40), transparent 55%),
+          radial-gradient(ellipse at 50% 40%, rgba(217,179,108,0.20), transparent 60%);"
         aria-hidden="true"
       ></div>
 
       <!-- Dynamic Island -->
-      <div class="absolute left-1/2 top-3 z-20 h-7 w-24 -translate-x-1/2 rounded-full bg-black" aria-hidden="true"></div>
+      <div class="absolute left-1/2 top-3 z-30 h-7 w-24 -translate-x-1/2 rounded-full bg-black" aria-hidden="true"></div>
 
       <!-- Status bar -->
-      <div class="relative z-10 flex items-center justify-between px-7 pt-3 text-[10px] font-medium text-ink dark:text-cream">
+      <div class="relative z-20 flex items-center justify-between px-7 pt-3 text-[10px] font-medium text-ink dark:text-cream">
         <span>9:41</span>
         <span class="flex items-center gap-1 opacity-70">
           <svg viewBox="0 0 16 10" class="h-2.5 w-4 fill-current"><path d="M1 5h2v4H1zm4-2h2v6H5zm4-2h2v8H9zm4-2h2v10h-2z"/></svg>
@@ -66,74 +156,165 @@ const askPrompt =
         </span>
       </div>
 
-      <!-- Title -->
-      <div class="relative z-10 px-7 pt-8">
-        <p class="text-[11px] font-medium uppercase tracking-[0.18em] text-ink-muted">
-          {locale === 'ru' ? 'Май 2026' : 'May 2026'}
-        </p>
-        <h3 class="mt-1 font-serif text-[28px] font-medium leading-tight tracking-tight text-ink dark:text-cream">
-          {locale === 'ru' ? 'Сегодня' : 'Today'}
-        </h3>
+      <!-- Toolbar — SF: line.3.horizontal.decrease.circle / square.and.pencil -->
+      <div class="relative z-20 mt-3 flex items-center justify-between px-5 text-ink/85 dark:text-cream/85">
+        <!-- line.3.horizontal.decrease.circle -->
+        <svg viewBox="0 0 24 24" class="h-[20px] w-[20px]" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <line x1="7" y1="9.5" x2="17" y2="9.5"/>
+          <line x1="9" y1="12.5" x2="15" y2="12.5"/>
+          <line x1="11" y1="15.5" x2="13" y2="15.5"/>
+        </svg>
+        <!-- square.and.pencil -->
+        <svg viewBox="0 0 24 24" class="h-[20px] w-[20px]" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14.5 4.5H6.5A2.5 2.5 0 0 0 4 7v10.5A2.5 2.5 0 0 0 6.5 20H17a2.5 2.5 0 0 0 2.5-2.5V10"/>
+          <path d="M11 13.5l8.2-8.2a1.7 1.7 0 1 1 2.4 2.4L13.4 15.9 10 17l1.1-3.5z"/>
+        </svg>
       </div>
 
-      <!-- Mood ring of last 7 days -->
-      <div class="relative z-10 mt-5 flex justify-between px-7">
-        {[
-          { c: '#D9B7B0' },
-          { c: '#A4B5A2' },
-          { c: '#D9B36C' },
-          { c: '#D9B7B0' },
-          { c: '#B98D85' },
-          { c: '#A4B5A2' },
-          { c: '#D9B36C' },
-        ].map((d, i) => (
-          <span
-            class="h-3 w-3 rounded-full ring-1 ring-white/60"
-            style={`background:${d.c}; opacity:${0.5 + i * 0.07};`}
-            aria-hidden="true"
-          ></span>
-        ))}
+      <!-- Search bar — placement: .navigationBarDrawer -->
+      <div class="relative z-20 mt-3 px-4">
+        <div class="flex items-center gap-2 rounded-xl border border-black/5 bg-black/[0.04] px-2.5 py-1.5 text-ink-muted dark:border-white/5 dark:bg-white/[0.06] dark:text-cream/55">
+          <!-- magnifyingglass -->
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5"/>
+            <line x1="15.4" y1="15.4" x2="20" y2="20"/>
+          </svg>
+          <span class="text-[12px] leading-none">{searchPlaceholder}</span>
+        </div>
+      </div>
+
+      <!-- Hero -->
+      <div class="relative z-20 mt-5 px-5">
+        <h3 class="font-serif text-[30px] font-medium leading-tight tracking-tight text-ink dark:text-cream">
+          {heroTitle}
+        </h3>
+        <p class="mt-1 text-[10px] font-medium uppercase tracking-[0.16em] text-ink-muted">
+          {heroSubtitle}
+        </p>
+      </div>
+
+      <!-- Month section header -->
+      <div class="relative z-20 mt-6 flex items-baseline gap-2.5 px-5">
+        <span class="font-serif text-[22px] font-medium leading-none tracking-tight text-ink dark:text-cream">
+          {monthLabel}
+        </span>
+        <span class="text-[10px] font-medium uppercase tracking-[0.16em] text-ink-muted">
+          {yearLabel}
+        </span>
+        <span class="ml-auto text-[10px] font-medium uppercase tracking-[0.16em] text-ink-muted">
+          {monthCount}
+        </span>
       </div>
 
       <!-- Entries list -->
-      <div class="relative z-10 mt-6 space-y-2.5 px-4">
-        {entries.map((e, i) => (
+      <div class="relative z-20 mt-3 space-y-2.5 px-3.5">
+        {entries.map((e) => (
           <div
-            class="rounded-2xl border border-black/5 bg-white/70 px-4 py-3 backdrop-blur-md dark:border-white/5 dark:bg-white/5"
-            style={`transform: translateY(${i * 0}px);`}
+            class="relative flex gap-3 overflow-hidden rounded-2xl border border-black/5 bg-white/65 px-3 py-3 shadow-[0_6px_14px_-6px_rgba(28,27,31,0.12)] backdrop-blur-md dark:border-white/5 dark:bg-white/[0.04]"
+            style={`background-color: ${e.tint};`}
           >
-            <div class="flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-ink-muted">
-              <span>{e.date}</span>
-              <span class="text-base leading-none">{e.mood}</span>
+            <!-- Mood accent bar -->
+            <span
+              class="block w-[3px] shrink-0 rounded-full"
+              style={`background: ${e.accent};`}
+              aria-hidden="true"
+            ></span>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center justify-between">
+                <span class="text-[9.5px] font-medium uppercase tracking-[0.16em] text-ink-muted">
+                  {e.date}
+                </span>
+                <span class="text-[13px] leading-none">{e.mood}</span>
+              </div>
+              <p class="mt-1.5 line-clamp-3 font-serif text-[13px] leading-snug text-ink dark:text-cream">
+                {e.body}
+              </p>
+              {e.tags && e.tags.length > 0 && (
+                <div class="mt-2 flex flex-wrap gap-1.5">
+                  {e.tags.map((t) => (
+                    <span
+                      class="rounded-full px-2 py-[2px] text-[9.5px] font-medium text-ink/82 dark:text-cream/82"
+                      style={`background: ${e.accent}33;`}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-            <p class="mt-1 font-serif text-[15px] font-medium leading-snug text-ink dark:text-cream">
-              {e.title}
-            </p>
-            <p class="mt-1 line-clamp-2 text-[12px] leading-snug text-ink-soft">
-              {e.body}
-            </p>
           </div>
         ))}
       </div>
 
-      <!-- Ask Mira composer pinned to bottom -->
-      <div class="absolute inset-x-3 bottom-3 z-10">
-        <div
-          class="flex items-center gap-2 rounded-full border border-black/5 bg-white/80 px-3 py-2 shadow-md backdrop-blur-xl dark:border-white/10 dark:bg-night-surface/80"
-        >
-          <span
-            class="grid h-7 w-7 shrink-0 place-items-center rounded-full font-serif text-sm italic font-medium"
-            style="background: radial-gradient(circle at 30% 30%, #FBE7DD, #D9B7B0 55%, #7A8E78);"
-          >m</span>
-          <div class="min-w-0 flex-1">
-            <p class="text-[9px] font-medium uppercase tracking-[0.16em] text-ink-muted">{askLabel}</p>
-            <p class="truncate text-[12px] text-ink dark:text-cream">{askPrompt}</p>
-          </div>
-          <span
-            class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink text-cream dark:bg-cream dark:text-ink"
-            aria-hidden="true"
-          >↑</span>
+      <!-- Floating capsule MiraTabBar — Liquid Glass with mood-tinted active pill.
+           Spans the full screen width with a tiny side margin, matching the app. -->
+      <div class="absolute inset-x-3 bottom-2.5 z-30">
+        <div class="flex w-full items-center justify-between rounded-full border border-black/5 bg-white/70 px-1.5 py-1.5 shadow-[0_10px_28px_-10px_rgba(28,27,31,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-night-surface/75">
+          {tabs.map((t) => (
+            <div
+              class={`flex flex-1 flex-col items-center justify-center gap-0.5 rounded-full py-1.5 transition-colors ${
+                t.active ? '' : 'text-ink-muted dark:text-cream/55'
+              }`}
+              style={t.active ? `background: ${activeTint}24; color: ${activeTint};` : undefined}
+            >
+              {t.key === 'journal' && (
+                <!-- book — open book, stroke-only (filled fights with itself
+                     at 17px and reads as a square). Active state gets a
+                     thicker stroke; the mood-tinted capsule pill behind
+                     already provides "selected" emphasis. -->
+                <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="none" stroke="currentColor" stroke-width={t.active ? 2 : 1.5} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 4.5C4 4.22 4.22 4 4.5 4h6c.83 0 1.5.67 1.5 1.5V20c0-.83-.67-1.5-1.5-1.5H4V4.5z"/>
+                  <path d="M20 4.5c0-.28-.22-.5-.5-.5h-6c-.83 0-1.5.67-1.5 1.5V20c0-.83.67-1.5 1.5-1.5H20V4.5z"/>
+                </svg>
+              )}
+
+              {t.key === 'ask' && (
+                <!-- sparkles (single shape works for outline + filled) -->
+                <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill={t.active ? 'currentColor' : 'none'} stroke="currentColor" stroke-width={t.active ? 0 : 1.5} stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 2.5l1.4 3.6 3.6 1.4-3.6 1.4L12 12.5l-1.4-3.6L7 7.5l3.6-1.4L12 2.5z"/>
+                  <path d="M18.5 13l.85 2.15L21.5 16l-2.15.85L18.5 19l-.85-2.15L15.5 16l2.15-.85L18.5 13z"/>
+                  <path d="M5.5 14l.7 1.8L8 16.5l-1.8.7L5.5 19l-.7-1.8L3 16.5l1.8-.7L5.5 14z"/>
+                </svg>
+              )}
+
+              {t.key === 'insights' && (t.active ? (
+                <!-- quote.bubble.fill -->
+                <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="currentColor" aria-hidden="true">
+                  <path d="M5 4h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5.6l-3.6 3.4c-.5.5-1.3.15-1.3-.55V18H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zm3.5 6c-.83 0-1.5.67-1.5 1.5 0 .55.3 1 .75 1.25-.05.6-.4 1.1-.95 1.45-.25.15-.3.45-.1.65l.3.3c.15.15.4.2.6.05 1.1-.6 1.9-1.65 1.9-3.05V11.5c0-.83-.67-1.5-1.5-1.5h.5zm6 0c-.83 0-1.5.67-1.5 1.5 0 .55.3 1 .75 1.25-.05.6-.4 1.1-.95 1.45-.25.15-.3.45-.1.65l.3.3c.15.15.4.2.6.05 1.1-.6 1.9-1.65 1.9-3.05V11.5c0-.83-.67-1.5-1.5-1.5h.5z"/>
+                </svg>
+              ) : (
+                <!-- quote.bubble -->
+                <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 4h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5.6l-3.6 3.4c-.5.5-1.3.15-1.3-.55V18H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z"/>
+                  <path d="M9 11.2c0 1.4-.8 2.45-1.9 3.05M15 11.2c0 1.4-.8 2.45-1.9 3.05" stroke-linecap="round"/>
+                  <circle cx="8.5" cy="11" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="14.5" cy="11" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              ))}
+
+              {t.key === 'settings' && (t.active ? (
+                <!-- gearshape.fill -->
+                <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="currentColor" aria-hidden="true">
+                  <path d="M19.43 12.98c.04-.32.07-.65.07-.98 0-.33-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65c-.03-.24-.24-.42-.49-.42h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.31.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/>
+                </svg>
+              ) : (
+                <!-- gearshape -->
+                <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19.43 12.98c.04-.32.07-.65.07-.98 0-.33-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65c-.03-.24-.24-.42-.49-.42h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.31.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65z"/>
+                  <circle cx="12" cy="12" r="3.2"/>
+                </svg>
+              ))}
+
+              <span class={`text-[8.5px] font-medium ${t.active ? 'font-semibold' : ''}`}>{t.label}</span>
+            </div>
+          ))}
         </div>
+      </div>
+
+      <!-- Home indicator -->
+      <div class="absolute inset-x-0 bottom-1 z-20 flex justify-center" aria-hidden="true">
+        <div class="h-[3px] w-[80px] rounded-full bg-ink/30 dark:bg-cream/30"></div>
       </div>
     </div>
   </div>
