@@ -25,12 +25,14 @@ const navItems = [
 <header class="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
   <nav class="glass mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full px-4 py-2.5 sm:px-6">
     <a href={home} class="flex items-center gap-2.5 text-ink dark:text-cream" aria-label="Mira home">
-      <span
-        class="grid h-8 w-8 place-items-center rounded-xl font-serif text-lg italic font-medium"
-        style="background: radial-gradient(circle at 30% 30%, #FBE7DD, #D9B7B0 55%, #7A8E78);"
-      >
-        m
-      </span>
+      <img
+        src="/mira-logo-128.png"
+        srcset="/mira-logo-128.png 1x, /mira-logo.png 4x"
+        alt=""
+        width="32"
+        height="32"
+        class="h-8 w-8 object-contain dark:invert"
+      />
       <span class="font-serif text-lg font-medium tracking-tight">Mira</span>
     </a>
 

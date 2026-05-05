@@ -17,10 +17,14 @@ const { locale, pathname = '/' } = Astro.props;
     <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
       <div class="max-w-md">
         <div class="flex items-center gap-2.5">
-          <span
-            class="grid h-9 w-9 place-items-center rounded-xl font-serif text-xl italic font-medium"
-            style="background: radial-gradient(circle at 30% 30%, #FBE7DD, #D9B7B0 55%, #7A8E78);"
-          >m</span>
+          <img
+            src="/mira-logo-128.png"
+            srcset="/mira-logo-128.png 1x, /mira-logo.png 4x"
+            alt=""
+            width="36"
+            height="36"
+            class="h-9 w-9 object-contain dark:invert"
+          />
           <span class="font-serif text-xl font-medium">Mira</span>
         </div>
         <p class="mt-4 text-sm leading-relaxed text-ink-soft">{t(locale, 'footer.tagline')}</p>

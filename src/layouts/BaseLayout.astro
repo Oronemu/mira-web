@@ -45,8 +45,9 @@ const altUrl = new URL(altPath, SITE.url).toString();
     <link rel="alternate" hreflang={locale === 'en' ? 'ru' : 'en'} href={altUrl} />
     <link rel="alternate" hreflang="x-default" href={SITE.url} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Fonts: Fraunces (variable serif) + Inter (sans). bunny.net = no Google tracking. -->
