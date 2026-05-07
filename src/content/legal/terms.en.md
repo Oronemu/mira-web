@@ -1,7 +1,7 @@
 # Terms of Use — Mira
 
 **Effective date:** 3 May 2026
-**Last updated:** 3 May 2026
+**Last updated:** 7 May 2026
 **Application:** Mira — Offline AI Journal (iOS)
 **Application identifier:** `com.veilbytesoft.Mira`
 **Provider (the "Developer", "we", "us"):** Ivan Rovkov, individual developer (natural person)
@@ -19,7 +19,7 @@ These Terms form a contract between you ("you", "User") and the Developer. The c
 
 ## 2. Eligibility
 
-You must be at least **16 years old** to use Mira. If you are between 16 and 18 (or under the age of majority in your jurisdiction), you confirm that your parent or legal guardian has reviewed and consented to these Terms on your behalf.
+You must be at least **13 years old** to use Mira. If you are between 13 and the age of majority in your jurisdiction, you confirm that your parent or legal guardian has reviewed and consented to these Terms on your behalf. In jurisdictions where the digital-services consent age under GDPR Art. 8 is higher than 13 (e.g., 14 in Germany and Austria, 15 in France, 16 in the Netherlands), users below that local threshold must obtain verifiable parental consent before using the App.
 
 Mira is **not** intended for children under 13. We comply with the U.S. Children's Online Privacy Protection Act (COPPA) and do not knowingly collect personal information from children under 13. If we discover that a child under 13 has used the App, we will delete their data and terminate the account.
 

@@ -1,7 +1,7 @@
 # Privacy Policy — Mira
 
 **Effective date:** 23 April 2026
-**Last updated:** 3 May 2026
+**Last updated:** 7 May 2026
 **Application:** Mira — Offline AI Journal (iOS)
 **Application identifier:** `com.veilbytesoft.Mira`
 **Developer (Data Controller):** Ivan Rovkov (individual developer, natural person)
@@ -406,9 +406,13 @@ Residents of jurisdictions with analogous laws (e.g., Brazil's LGPD, Canada's PI
 
 ## 13. Children's Privacy
 
-Mira is **not directed to children under 13** (or, in the EU/UK, under 16 where applicable under GDPR Art. 8). The App does not knowingly collect personal information from such children. The age rating in the App Store reflects the suitability of journaling and reflective content for older minors with parental guidance.
+Mira is rated **13+** in the App Store and is **not directed to children under 13**. The App does not knowingly collect personal information from children under 13. Consistent with the U.S. Children's Online Privacy Protection Act (COPPA), if we become aware that personal information has been collected from a child under 13 without verifiable parental consent, we will delete it promptly.
 
-If you are a parent or guardian and believe that a child has used Mira without your authorisation, please contact us at **arbuzikmr@gmail.com** and we will assist in deleting the local data from the device and advise on revoking any optional features.
+**EU / UK / EEA users (GDPR Art. 8).** The age at which a minor can lawfully consent to the processing of personal data for information-society services varies by member state — between 13 and 16. For users below the digital-consent age applicable in their country (e.g., **16** in the Netherlands, Germany prior to local lowering, and several other member states; **15** in France; **14** in Austria and Spain; **13** in the UK and Ireland), processing of personal data through optional features (Diagnostics & Analytics, iCloud Sync, Pro AI) requires the **verifiable consent of the holder of parental responsibility**. Where such consent has not been obtained, the user must keep the relevant features disabled.
+
+**Russian Federation users (152-FZ Art. 9).** Consent to the processing of personal data of minors **under 14 years of age** may only be given by their legal representative (parent, adoptive parent, or guardian). Minors aged 14 to 18 may consent on their own to the extent permitted by Article 26 of the Civil Code of the Russian Federation; in other cases consent of the legal representative is required.
+
+If you are a parent or legal guardian and believe that a child has used Mira without your authorisation, please contact us at **arbuzikmr@gmail.com**. We will assist in deleting the local data from the device, revoking any optional features, and (where applicable) deleting any associated records held by our processors (e.g., Firebase Installation ID, hosted Pro AI usage counters).
 
 ---
 
