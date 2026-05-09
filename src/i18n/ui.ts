@@ -92,7 +92,7 @@ export const ui = {
 
     'footer.tagline': 'A quiet, on-device journal.',
     'footer.legal.privacy': 'Privacy Policy',
-    'footer.legal.terms': 'Terms of Use',
+    'footer.legal.terms': 'EULA',
     'footer.legal.support': 'Support',
     'footer.copy': '© 2026 Ivan Rovkov · Made with care.',
     'footer.lang': 'Language',
@@ -105,7 +105,7 @@ export const ui = {
     'support.faq.title': 'Frequently asked',
 
     'legal.privacy.title': 'Privacy Policy',
-    'legal.terms.title': 'Terms of Use',
+    'legal.terms.title': 'EULA',
     'legal.last_updated': 'Last updated',
     'legal.back': 'Back home',
 
@@ -203,7 +203,7 @@ export const ui = {
 
     'footer.tagline': 'Тихий дневник, который работает на устройстве.',
     'footer.legal.privacy': 'Политика конфиденциальности',
-    'footer.legal.terms': 'Условия использования',
+    'footer.legal.terms': 'EULA',
     'footer.legal.support': 'Поддержка',
     'footer.copy': '© 2026 Иван Ровков · Сделано с заботой.',
     'footer.lang': 'Язык',
@@ -216,7 +216,7 @@ export const ui = {
     'support.faq.title': 'Частые вопросы',
 
     'legal.privacy.title': 'Политика конфиденциальности',
-    'legal.terms.title': 'Условия использования',
+    'legal.terms.title': 'EULA',
     'legal.last_updated': 'Последнее обновление',
     'legal.back': 'На главную',
 

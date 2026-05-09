@@ -1,4 +1,4 @@
-# Terms of Use — Mira
+# EULA — Mira
 
 **Effective date:** 3 May 2026
 **Last updated:** 7 May 2026
