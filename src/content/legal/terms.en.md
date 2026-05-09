@@ -22,6 +22,8 @@ You must be at least **13 years old** to use Mira. If you are between 13 and the
 
 Mira is **not** intended for children under 13. We comply with the U.S. Children's Online Privacy Protection Act (COPPA) and do not knowingly collect personal information from children under 13. If we discover that a child under 13 has used the App, we will delete their data and terminate the account.
 
+**Compliance with export and sanctions laws.** By using the App you represent and warrant that: (a) you are not located in, under the control of, or a national or resident of any country that is subject to a U.S. Government embargo or that has been designated by the U.S. Government as a "terrorist-supporting" country; and (b) you are not listed on any U.S. Government list of prohibited or restricted parties, including the Specially Designated Nationals List, the Denied Persons List, and the Entity List.
+
 ---
 
 ## 3. Licence
@@ -148,6 +150,8 @@ Mira interoperates with several third-party services. Your use of those services
 - **Google LLC / Google Ireland Ltd.** — Firebase Analytics, Crashlytics, Cloud Messaging, Remote Config (subject to your in-app consent). <https://firebase.google.com/terms>.
 - **Hugging Face, Inc.** — model file downloads for on-device AI (no journal content is sent). <https://huggingface.co/terms-of-service>.
 
+You are responsible for reviewing and complying with the applicable terms of these third parties when using any feature of the App that relies on their services.
+
 ---
 
 ## 9. Disclaimers and Limitation of Liability
@@ -172,7 +176,19 @@ Nothing in these Terms excludes or limits liability that cannot lawfully be excl
 
 ### 9.5. Apple's role
 
-Apple is **not** a party to these Terms and is **not** responsible for the App or any claims relating to it. To the extent allowed by applicable law, Apple has no warranty obligation whatsoever with respect to the App. Any claims relating to the App's content, performance, or non-conformity should be addressed to the Developer in accordance with these Terms.
+Apple is **not** a party to these Terms and is **not** responsible for the App. The Developer, not Apple, is responsible for the App and its content.
+
+**Warranty and refund.** To the maximum extent permitted by applicable law, Apple has no warranty obligation whatsoever with respect to the App. In the event of any failure of the App to conform to any applicable warranty, you may notify Apple, and Apple will refund the purchase price for the App (if any) to you. To the maximum extent permitted by applicable law, Apple will have no other warranty obligation whatsoever with respect to the App, and any other claims, losses, liabilities, damages, costs, or expenses attributable to any failure to conform to any warranty will be the sole responsibility of the Developer.
+
+**Product claims.** The Developer, not Apple, is responsible for addressing any claims by you or any third party relating to the App or your possession and/or use of the App, including, without limitation: (i) product liability claims; (ii) any claim that the App fails to conform to any applicable legal or regulatory requirement; and (iii) claims arising under consumer protection, privacy, or similar legislation.
+
+### 9.6. Maintenance and support
+
+The Developer is solely responsible for providing any maintenance and support services with respect to the App, as required under applicable law and as specified in these Terms. Apple has **no obligation whatsoever** to furnish any maintenance and support services with respect to the App.
+
+### 9.7. Intellectual property infringement
+
+In the event of any third-party claim that the App or your possession and use of the App infringes that third party's intellectual property rights, the Developer (not Apple) will be solely responsible for the investigation, defense, settlement, and discharge of any such intellectual property infringement claim, to the extent required by these Terms.
 
 ---
 
