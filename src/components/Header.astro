@@ -41,7 +41,8 @@ const navItems = [
         <li>
           <a
             href={item.href}
-            class="transition-colors duration-300 hover:text-ink dark:hover:text-cream"
+            data-astro-prefetch="false"
+            class="nav-anchor transition-colors duration-300 hover:text-ink dark:hover:text-cream"
           >
             {t(locale, item.key)}
           </a>
@@ -54,10 +55,30 @@ const navItems = [
       <LangSwitch locale={locale} pathname={pathname} />
       <a
         href={`${home}#download`}
-        class="btn btn-primary hidden text-sm sm:inline-flex"
+        data-astro-prefetch="false"
+        class="nav-anchor btn btn-primary hidden text-sm sm:inline-flex"
       >
         {t(locale, 'nav.download')}
       </a>
     </div>
   </nav>
 </header>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const anchor = (e.target as Element).closest('a.nav-anchor');
+    if (!anchor) return;
+    const href = anchor.getAttribute('href');
+    if (!href) return;
+    const hash = href.includes('#') ? href.slice(href.indexOf('#')) : null;
+    if (!hash) return;
+    const url = new URL(href, location.href);
+    if (url.pathname.replace(/\/$/, '') !== location.pathname.replace(/\/$/, '')) return;
+    e.preventDefault();
+    const target = document.querySelector(hash);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      history.replaceState(null, '', hash);
+    }
+  });
+</script>

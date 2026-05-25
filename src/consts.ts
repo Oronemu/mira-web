@@ -16,10 +16,7 @@ export const SITE = {
   supportEmail: 'support@mira-diary.com',
   developer: 'Ivan Rovkov',
   bundleId: 'com.veilbytesoft.Mira',
-  // App Store URL — once the app is live, paste the full apps.apple.com URL here.
-  // Until then a placeholder hash keeps anchors valid; the download CTA renders
-  // a "Coming soon" pill when this stays as `#`.
-  appStoreUrl: '#',
+  appStoreUrl: 'https://apps.apple.com/app/mira-your-personal-diary/id6763016649',
   github: 'https://github.com/Oronemu',
 } as const;
 
