@@ -6,7 +6,7 @@ import PhoneMockup from './PhoneMockup.astro';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
-const hasAppStore = SITE.appStoreUrl !== '#';
+const hasAppStore = (SITE.appStoreUrl as string) !== '#';
 ---
 
 <section class="relative px-4 pt-12 sm:px-6 sm:pt-20">
