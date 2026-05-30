@@ -1,7 +1,7 @@
 # Privacy Policy — Mira
 
 **Effective date:** 23 April 2026
-**Last updated:** 7 May 2026
+**Last updated:** 30 May 2026
 **Application:** Mira — Offline AI Journal (iOS)
 **Developer (Data Controller):** Ivan Rovkov (individual developer, natural person)
 **Contact:** arbuzikmr@gmail.com
@@ -180,7 +180,7 @@ When you purchase Mira Pro through the iOS App Store, the following data flows f
 
 ### 5.12. Hosted AI Usage Counters *(Mira Pro subscribers only)*
 
-To enforce per-user monthly caps on the heaviest AI features (Ask Mira: 100 / month; manual weekly reflection: 2 / month) the Mira backend stores integer counters keyed on the non-personal subscription identifier plus the current calendar month. Counters reset monthly. They contain no message content and no personal identifiers beyond the App Store-issued subscription id.
+To enforce per-user monthly caps on the heaviest AI features (Ask Mira: 200 / month; manual weekly reflection: 2 / month) the Mira backend stores integer counters keyed on the non-personal subscription identifier plus the current calendar month. Counters reset monthly. They contain no message content and no personal identifiers beyond the App Store-issued subscription id.
 
 **Storage:** Cloudflare key-value storage. Stale counters auto-expire after 90 days.
 

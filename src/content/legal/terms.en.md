@@ -1,7 +1,7 @@
 # EULA — Mira
 
 **Effective date:** 3 May 2026
-**Last updated:** 7 May 2026
+**Last updated:** 30 May 2026
 **Application:** Mira — Offline AI Journal (iOS)
 **Provider (the "Developer", "we", "us"):** Ivan Rovkov, individual developer (natural person)
 **Contact:** arbuzikmr@gmail.com
@@ -74,7 +74,7 @@ A current list of features unlocked by Mira Pro is shown on the in-app paywall. 
 
 To prevent abuse and manage infrastructure costs we apply per-user monthly limits to certain Pro AI features:
 
-- **Ask Mira** — 100 messages per calendar month using our default Claude model. Once the limit is reached the feature pauses until the next month.
+- **Ask Mira** — 200 messages per calendar month using our default Claude model. Once the limit is reached the feature pauses until the next month.
 - **Manual weekly reflection** — 2 invocations per calendar month.
 - **Auto-fired weekly reflection** — unlimited (technically capped by frequency: 1× / week).
 
